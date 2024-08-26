@@ -1,0 +1,24 @@
+host: "0.0.0.0"
+port: 8000
+# worker: 2 # The default is cpu_count*2+1
+check_interval: 10
+debug: false
+timeout: 5
+check_path: "/"
+ssl:
+  enable: false
+  certs:
+    - key: "./privkey.pem"
+      cert: "./fullchain.pem"
+      password: "12345678"
+      
+servers:
+  "127.0.0.1:8000": # Domain
+    type: "RoundScheduling"
+    uris: # Backend server URI list
+      - "http://127.0.0.1:5000"
+      - "http://127.0.0.1:5001"
+      - "http://127.0.0.1:5000"
+      - "http://127.0.0.1:5001"
+      - "http://127.0.0.1:5000"
+      - "http://127.0.0.1:5001"
