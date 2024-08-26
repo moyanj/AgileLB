@@ -1,6 +1,6 @@
 host: "0.0.0.0"
 port: 8000
-# worker: 2 # The default is cpu_count*2+1
+worker: 2 # The default is cpu_count*2+1
 check_interval: 10
 debug: false
 timeout: 5
@@ -18,7 +18,4 @@ servers:
     uris: # Backend server URI list
       - "http://127.0.0.1:5000"
       - "http://127.0.0.1:5001"
-      - "http://127.0.0.1:5000"
-      - "http://127.0.0.1:5001"
-      - "http://127.0.0.1:5000"
-      - "http://127.0.0.1:5001"
+      

@@ -4,6 +4,7 @@ import threading
 import urllib
 import mmh3
 
+
 class BaseSelector:
     def __init__(self, servers: list, config):
         self.servers = servers
@@ -12,18 +13,21 @@ class BaseSelector:
         self.is_run = True
         self.check_thread = threading.Thread(target=self.check, daemon=True)
         self.lock = threading.Lock()
-        
+
     async def get(self, requests):
         raise TypeError("Cannot use BaseSelector as selector")
-    
+
     @property
     def is_live(self):
         return list(self.is_live_set)
-        
+
     def check_server(self, server):
         """检查单个服务器的状态，并更新活跃服务器列表。"""
         try:
-            res = urllib.request.urlopen(urllib.parse.urljoin(server, self.config.get('check_path', '/')), timeout=self.config.get('timeout', 5))
+            res = urllib.request.urlopen(
+                urllib.parse.urljoin(server, self.config.get("check_path", "/")),
+                timeout=self.config.get("timeout", 5),
+            )
             if 100 <= res.status <= 499:
                 if server not in self.is_live_set:
                     with self.lock:
@@ -95,15 +99,14 @@ class LeastRequestScheduling(BaseSelector):
         # 更新请求计数
         self.request_count[server] += 1
         return server
-        
+
+
 class IPHashScheduling(BaseSelector):
-    def hash(self, data:str):
+    def hash(self, data: str):
         data = data.encode()
-        h = mmh3.hash(data, signed= False)
+        h = mmh3.hash(data, signed=False)
         return h % len(self.servers)
-        
+
     async def get(self, request):
         n = self.hash(request.ip)
         return self.servers[n]
-        
-        

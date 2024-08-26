@@ -6,7 +6,9 @@ app = Flask(__name__)
 @app.route("/")
 def j():
     print(request.headers)
-    print(request.remote_addr,)
+    print(
+        request.remote_addr,
+    )
     print(request.data)
     return "6"
 

@@ -7,6 +7,7 @@ from urllib.parse import urljoin
 import yaml
 import time
 import os
+
 try:
     import ujson as json
 except:
@@ -16,7 +17,7 @@ except:
 from . import selector
 from .views.manager import bp as manager_blueprint
 
-Sanic.start_method = os.environ.get('AL_CONFIG_START_METHOD', 'fork')
+Sanic.start_method = os.environ.get("AL_CONFIG_START_METHOD", "fork")
 
 # Create Sanic Application Instance
 app = Sanic("AgileLB", loads=json.loads, dumps=json.dumps)
@@ -30,7 +31,7 @@ app.config.update(user_config)
 
 # 初始化调度器
 servers = app.config.get("servers", {})
-app.ctx.sels = {} 
+app.ctx.sels = {}
 for server_key in servers.keys():
     server = servers[server_key]
     try:
@@ -41,6 +42,7 @@ for server_key in servers.keys():
     except AttributeError:
         logger.error(f"Selector type {sel_type} does not exist.")
         raise
+
 
 # 钩子
 async def clean(app, loop):
@@ -72,19 +74,19 @@ async def handle_request(request: Request, path: str = None):
     headers = dict(request.headers)
     # 重写X-Forwarded-For
     headers["X-Forwarded-For"] = headers.get(
-        "X-Forwarded-For", f'{request.client_ip}:{request.port}'
+        "X-Forwarded-For", f"{request.client_ip}:{request.port}"
     ).split(",")[-1]
     # 重写协议
-    headers['X-Forwarded-Proto'] = request.scheme
+    headers["X-Forwarded-Proto"] = request.scheme
     # 重写请求ID
-    if app.config.get('request_id', True):
-        headers['X-Request-ID'] = str(request.id)
-    
+    if app.config.get("request_id", True):
+        headers["X-Request-ID"] = str(request.id)
+
     sel = app.ctx.sels[request.host]
     server = await sel.get(request)
     if not server:
         return response.json({"code": 502, "msg": "No servers available."}, status=502)
-    return response.text('ok')
+    return response.text("ok")
     try:
         st = time.time()
         async with aiohttp.ClientSession() as session:
