@@ -54,5 +54,6 @@ YAML::Node get_config() {
 
 int start() {
     Config = get_config();
+    run();
     return 0;
 }
