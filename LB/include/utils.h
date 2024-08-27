@@ -1,9 +1,7 @@
-#ifndef UTILS_HPP
-#define UTILS_HPP
+#ifndef UTILS_H
+#define UTILS_H
 
-#include <iostream>
 #include <string>
-using namespace std;
 
 #if defined(_WIN32) || defined(_WIN64)
     #define IS_WIN
@@ -13,9 +11,6 @@ using namespace std;
     #endif
 #endif
 
-void print(const string& text) {
-    cout << text << endl;
-}
-
+void print(const std::string& text);
 
 #endif

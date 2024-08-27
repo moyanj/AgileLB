@@ -1,10 +1,10 @@
 #ifndef APP_H
 #define APP_H
 #include <yaml-cpp/yaml.h>
-#include "httplib.h"
-
+#include <string>
+std::string get_env_variable(const char* variableName);
 YAML::Node get_config();
 extern YAML::Node Config;
 int start();
-void handler(const httplib::Request &req, httplib::Response &res);
+std::string get_env_variable(const char* variableName);
 #endif

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include "compiler.hpp"
-#include "utils.hpp"
+#include "utils.h"
 #include "app.h"
 
 using namespace std;
@@ -14,7 +14,7 @@ int main() {
     system("clear");
 #endif
 
-    cout << "AgileLB v1.0.0 " << '(' << COMPILE_TIME << ") [" << get_compiler() << ']' << endl;
+    cout << "AgileLB v1.0.1 " << '(' << COMPILE_TIME << ") [" << get_compiler() << ']' << endl;
     start();
 
 }
