@@ -21,13 +21,10 @@ file(GLOB_RECURSE LB_HEADERS "${LB_INCLUDE_DIR}/*.h" "${LB_INCLUDE_DIR}/*.hpp")
 file(GLOB_RECURSE LIB_HEADERS "${LIB_INCLUDE_DIR}/*.h" "${LIB_INCLUDE_DIR}/*.hpp")
 
 add_executable(AgileLB ${LB_SOURCES} ${LB_HEADERS})
-add_executable(cli tcpecho.cpp ${LB_HEADERS})
 
 # 头文件目录
 target_include_directories(AgileLB PRIVATE ${LB_INCLUDE_DIR})
 target_include_directories(AgileLB PRIVATE ${LIB_INCLUDE_DIR})
-target_include_directories(cli PRIVATE ${LB_INCLUDE_DIR})
-target_include_directories(cli PRIVATE ${LIB_INCLUDE_DIR})
 
 # 查找库
 find_package(YAML-CPP REQUIRED) # yaml-cpp
@@ -38,4 +35,3 @@ target_include_directories(AgileLB PRIVATE ${YAML_CPP_INCLUDE_DIR})
 
 target_link_libraries(AgileLB ${YAML_CPP_LIBRARIES})
 target_link_libraries(AgileLB Sockpp::sockpp)
-target_link_libraries(cli Sockpp::sockpp)
