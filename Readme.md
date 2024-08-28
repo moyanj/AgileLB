@@ -1,10 +1,10 @@
 # AgileLB
 
-AgileLB 是一个轻量、超高性能且易于使用的负载均衡器，使用 Python 编写，旨在提供简单的配置和高效的请求分发功能。
+AgileLB 是一个轻量、高性能且易于使用的负载均衡器，使用 Python 编写，旨在提供简单的配置和高效的请求分发功能。
 
 ## 特性
 
-- **轻量**：AgileLB 设计简洁，使用少量依赖，可以在任何 Python 环境中运行。
+- **轻量**：AgileLB 设计简洁，使用少量依赖，可以在几乎任何 Python 环境中运行。
 - **高性能**：优化的算法和精简的代码，能够以异步方式高效处理大量请求。
 - **易用**：简洁的配置方式，支持多种常用负载均衡策略。
 
@@ -18,6 +18,9 @@ cd AgileLB
 git checkout main
 pip install -r requirements.txt
 ```
+
+## 性能测试
+见[performance.md](performance.md)
 
 ## 使用
 
