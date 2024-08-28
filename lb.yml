@@ -5,6 +5,8 @@ check_interval: 10
 debug: false
 timeout: 5
 check_path: "/"
+request_id: true
+
 ssl:
   enable: false
   certs:
@@ -14,8 +16,7 @@ ssl:
       
 servers:
   "127.0.0.1:8000": # Domain
-    type: "RoundScheduling"
+    type: "RandomScheduling"
     uris: # Backend server URI list
       - "http://127.0.0.1:5000"
-      - "http://127.0.0.1:5001"
       

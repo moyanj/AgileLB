@@ -13,7 +13,6 @@ try:
 except:
     import orjson as json
 
-
 from . import selector
 from .views.manager import bp as manager_blueprint
 
@@ -86,7 +85,7 @@ async def handle_request(request: Request, path: str = None):
     server = await sel.get(request)
     if not server:
         return response.json({"code": 502, "msg": "No servers available."}, status=502)
-    return response.text("ok")
+    
     try:
         st = time.time()
         async with aiohttp.ClientSession() as session:

@@ -1,17 +1,11 @@
-from flask import Flask, request
+from sanic import Sanic, response
+from sys import argv
 
-app = Flask(__name__)
-
+app = Sanic(__name__)
 
 @app.route("/")
-def j():
-    print(request.headers)
-    print(
-        request.remote_addr,
-    )
-    print(request.data)
-    return "6"
-
+async def j(request):
+    return response.text("6")
 
 if __name__ == "__main__":
-    app.run(debug=False, port=5000)
+    app.run(host="0.0.0.0", port=int(argv[1]), debug=False)
